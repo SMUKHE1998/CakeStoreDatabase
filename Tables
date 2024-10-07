@@ -1,0 +1,212 @@
+//create database app_data;
+//create schema app_data_schema;
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY ,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    PhoneNumber VARCHAR(15),
+    Address VARCHAR(255)
+);
+CREATE TABLE Cakes (
+    CakeID INT PRIMARY KEY ,
+    CakeName VARCHAR(100) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    StockQuantity INT DEFAULT 0
+);
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY ,
+    CustomerID INT,
+    OrderDate DATE NOT NULL,
+    TotalAmount DECIMAL(10, 2),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+CREATE TABLE OrderDetails (
+    OrderDetailID INT PRIMARY KEY ,
+    OrderID INT,
+    CakeID INT,
+    Quantity INT NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (CakeID) REFERENCES Cakes(CakeID)
+);
+CREATE TABLE Payments (
+    PaymentID INT PRIMARY KEY ,
+    OrderID INT,
+    PaymentDate DATE NOT NULL,
+    PaymentMethod VARCHAR(50),
+    Amount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
+select * from customers;
+
+-- CREATE TABLE Orders(
+--     Order_item_id INT PRIMARY KEY,
+--     Order_id INT NOT NULL,
+--     CustomerID INT NOT NULL,
+--     Status VARCHAR(50) NOT NULL,
+--     Qnt INT NOT NULL,
+--     PaymentID INT NOT NULL,
+--     unit_price DECIMAL(10, 2) NOT NULL,
+--     Create_dt DATE NOT NULL,
+--     Currency VARCHAR(20) NOT NULL,
+--     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+--     FOREIGN KEY (PaymentID) REFERENCES Payments(PaymentID) 
+--     )
+
+-- Insert data in Customers Table:::
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (1, 'John Doe', 'johndoe@gmail.com', '1234567890', '123 Elm Street, NY');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (2, 'Jane Smith', 'janesmith@gmail.com', '0987654321', '456 Oak Avenue, LA');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (3, 'Bob Johnson', 'bobjohnson@yahoo.com', '1231231234', '789 Pine Lane, SF');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (4, 'Alice Brown', 'alicebrown@hotmail.com', '9876543210', '321 Maple Drive, TX');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (5, 'Charlie Green', 'charliegreen@gmail.com', '4567891230', '654 Cedar Way, FL');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (6, 'Emily White', 'emilywhite@gmail.com', '9879879876', '111 Birch Street, IL');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (7, 'David Lee', 'davidlee@gmail.com', '5555555555', '222 Oakwood Blvd, NY');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (8, 'Grace Kim', 'gracekim@yahoo.com', '4444444444', '333 Willow Lane, WA');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (9, 'Henry Adams', 'henryadams@gmail.com', '6666666666', '444 Palm Court, NV');
+
+INSERT INTO Customers (CustomerID, Name, Email, PhoneNumber, Address) 
+VALUES (10, 'Sophie Martinez', 'sophiemartinez@gmail.com', '7777777777', '555 Pine Ridge, CO');
+
+-- Insert Queries for Cakes Table:::
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (1, 'Chocolate Cake', 20.00, 50);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (2, 'Vanilla Cake', 18.50, 40);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (3, 'Red Velvet Cake', 22.00, 30);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (4, 'Carrot Cake', 19.75, 25);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (5, 'Black Forest Cake', 23.50, 20);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (6, 'Cheesecake', 21.00, 35);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (7, 'Lemon Cake', 18.00, 40);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (8, 'Pineapple Cake', 17.50, 50);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (9, 'Strawberry Cake', 20.25, 30);
+
+INSERT INTO Cakes (CakeID, CakeName, Price, StockQuantity) 
+VALUES (10, 'Marble Cake', 19.50, 45);
+
+-- Insert Quries for Orders Table:::
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (1, 1, '2024-10-01', 40.00);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (2, 2, '2024-10-02', 22.00);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (3, 3, '2024-10-03', 46.00);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (4, 4, '2024-10-04', 23.50);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (5, 5, '2024-10-05', 50.75);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (6, 6, '2024-10-06', 18.50);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (7, 7, '2024-10-07', 36.50);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (8, 8, '2024-10-08', 21.00);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (9, 9, '2024-10-09', 60.00);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount) 
+VALUES (10, 10, '2024-10-10', 55.00);
+
+-- Insert Quries for OrderDetails Table:::
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (1, 1, 1, 2, 20.00);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (2, 1, 2, 1, 20.00);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (3, 2, 3, 1, 22.00);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (4, 3, 4, 2, 23.00);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (5, 3, 5, 1, 23.00);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (6, 4, 6, 1, 23.50);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (7, 5, 7, 2, 25.00);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (8, 6, 8, 1, 18.50);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (9, 7, 9, 2, 18.25);
+
+INSERT INTO OrderDetails (OrderDetailID, OrderID, CakeID, Quantity, Price) 
+VALUES (10, 8, 10, 1, 21.00);
+
+--Insert Quries for Payments Table:::
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (1, 1, '2024-10-01', 'Credit Card', 40.00);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (2, 2, '2024-10-02', 'Debit Card', 22.00);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (3, 3, '2024-10-03', 'PayPal', 46.00);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (4, 4, '2024-10-04', 'Credit Card', 23.50);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (5, 5, '2024-10-05', 'Credit Card', 50.75);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (6, 6, '2024-10-06', 'Debit Card', 18.50);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (7, 7, '2024-10-07', 'PayPal', 36.50);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (8, 8, '2024-10-08', 'Credit Card', 21.00);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (9, 9, '2024-10-09', 'Debit Card', 60.00);
+
+INSERT INTO Payments (PaymentID, OrderID, PaymentDate, PaymentMethod, Amount) 
+VALUES (10, 10, '2024-10-10', 'PayPal', 55.00);
+
+
+Select * from Customers;
